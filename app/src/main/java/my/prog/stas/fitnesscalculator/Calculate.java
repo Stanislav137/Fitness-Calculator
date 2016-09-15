@@ -23,10 +23,10 @@ public class Calculate extends AppCompatActivity implements View.OnClickListener
     private TextView active, mass, steady, lose_weight, proteins_result_mass, proteins_result_steady, proteins_result_lose,
                      carb_result_mass, carb_result_steady, carb_result_lose, fats_result_mass, fats_result_steady, fats_result_lose;
     private EditText age, hight, weight;
-     ScrollView scrollView;
+    private ScrollView scrollView;
 
     public short Male_Female = 0;
-    private float A = 0;
+    private float training_val = 0;
     private float result_male_steady = 0;
     private float result_male_mass = 0;
     private float result_male_lose = 0;
@@ -35,7 +35,7 @@ public class Calculate extends AppCompatActivity implements View.OnClickListener
     private float result_female_lose = 0;
     private float weight_val = 0;
     private int age_val = 0;
-    private int hight_val = 0;
+    private int height_val = 0;
 
     private int proteins_mass = 0;
     private int proteins_steady = 0;
@@ -111,23 +111,23 @@ public class Calculate extends AppCompatActivity implements View.OnClickListener
         }
 
         weight_val = Float.parseFloat(weight.getText().toString());
-        hight_val = Integer.parseInt(hight.getText().toString());
+        height_val = Integer.parseInt(hight.getText().toString());
         age_val = Integer.parseInt(age.getText().toString());
         float a = Float.parseFloat(String.valueOf(training_seekBar.getProgress()));
         if (a <= 20) {
-            A = 1.2f;
+            training_val = 1.2f;
         }
         if (a <= 40 && a > 20) {
-            A = 1.375f;
+            training_val = 1.375f;
         }
         if (a <= 60 && a > 40) {
-            A = 1.55f;
+            training_val = 1.55f;
         }
         if (a <= 80 && a > 60) {
-            A = 1.725f;
+            training_val = 1.725f;
         }
         if (a <= 100 && a > 80) {
-            A = 1.9f;
+            training_val = 1.9f;
         }
 
        if(Male_Female == 1) { resultMaleMethod(); } else { resultFemaleMethod(); }
@@ -177,9 +177,9 @@ public class Calculate extends AppCompatActivity implements View.OnClickListener
 
     private void resultMaleMethod() {
 
-        result_male_steady = (int) ((10 * weight_val + 6.25f * hight_val - 5 * age_val + 5) * A);
-        result_male_lose = (int) ((10 * weight_val + 6.25f * hight_val - 5 * age_val + 5) * A) - 503;
-        result_male_mass = (int) ((10 * weight_val + 6.25f * hight_val - 5 * age_val + 5) * A) + 503;
+        result_male_steady = (int) ((10 * weight_val + 6.25f * height_val - 5 * age_val + 5) * training_val);
+        result_male_lose = (int) ((10 * weight_val + 6.25f * height_val - 5 * age_val + 5) * training_val) - 503;
+        result_male_mass = (int) ((10 * weight_val + 6.25f * height_val - 5 * age_val + 5) * training_val) + 503;
 
         proteins_mass = (int)(2 * weight_val) * 4;
         proteins_steady = (int)(2 * weight_val) * 4;
@@ -197,9 +197,9 @@ public class Calculate extends AppCompatActivity implements View.OnClickListener
 
     private void resultFemaleMethod() {
 
-        result_female_steady = (int) ((10 * weight_val + 6.25f * hight_val - 5 * age_val - 161) * A);
-        result_female_lose = (int) ((10 * weight_val + 6.25f * hight_val - 5 * age_val - 161) * A) - 500;
-        result_female_mass = (int) ((10 * weight_val + 6.25f * hight_val - 5 * age_val - 161) * A) + 500;
+        result_female_steady = (int) ((10 * weight_val + 6.25f * height_val - 5 * age_val - 161) * training_val);
+        result_female_lose = (int) ((10 * weight_val + 6.25f * height_val - 5 * age_val - 161) * training_val) - 500;
+        result_female_mass = (int) ((10 * weight_val + 6.25f * height_val - 5 * age_val - 161) * training_val) + 500;
 
         proteins_mass = (int)(2 * weight_val) * 4;
         proteins_steady = (int)(2 * weight_val) * 4;
